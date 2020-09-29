@@ -31,7 +31,7 @@ namespace singToSeminar.Controllers
         {
             using (var context = new ApplikationDbContext())
             {
-                var seminar = context.Seminars.Find(id);
+                var seminar = context.Seminars.Where(c => c.id == id).Include(o => o.bookings).FirstOrDefault();
                 return seminar;
             }      
         }

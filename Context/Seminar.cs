@@ -30,4 +30,3 @@ namespace singToSeminar.Context
         public List<Booking> bookings { set; get; }
     }
 }
-
