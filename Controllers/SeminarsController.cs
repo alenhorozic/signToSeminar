@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using singToSeminar.Context;
@@ -11,6 +12,7 @@ using singToSeminar.Context;
 namespace singToSeminar.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyPolicy")]
     [ApiController]
     public class SeminarsController : ControllerBase
     {
@@ -20,7 +22,7 @@ namespace singToSeminar.Controllers
         {
             using (var context = new ApplikationDbContext()) 
             {
-                var seminars = context.Seminars.Include(c => c.bookings).ToArray();
+                var seminars = context.Seminars.OrderBy(a => a.dateAndTime).Include(c => c.bookings).ToArray();
                 return seminars;
             }
         }
